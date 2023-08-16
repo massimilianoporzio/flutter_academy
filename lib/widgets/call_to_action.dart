@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_academy/res/responsive.dart';
 
 class CallToAction extends StatelessWidget {
   const CallToAction({super.key});
@@ -13,14 +14,21 @@ class CallToAction extends StatelessWidget {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Text(
           "Ready to Begin Learning",
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.displayMedium,
         ),
         const SizedBox(
           height: 20,
         ),
         ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(fixedSize: Size(180, 70)),
+          onPressed: () {
+            print("register");
+          },
+          style: ElevatedButton.styleFrom(
+            fixedSize: MediaQuery.of(context).size.width > ScreenSizes.md
+                ? const Size(180, 50)
+                : const Size(180, 60),
+          ),
           child: const Text('Get Started'),
         )
       ]),

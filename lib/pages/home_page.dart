@@ -6,17 +6,88 @@ import 'package:flutter_academy/widgets/featured_section.dart';
 import 'package:flutter_academy/widgets/footer.dart';
 import 'package:flutter_academy/widgets/header.dart';
 
+import '../res/responsive.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MediaQuery.of(context).size.width > ScreenSizes.md
+          ? null
+          : Drawer(
+              child: ListView(
+                children: [
+                  Container(
+                    color: Theme.of(context).primaryColor,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      "Flutter Academy",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: Colors.white),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text("Home"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: const Text("Courses"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: const Text("About"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: const Text("Contact"),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
           AppBar(
-            title: const Text('Flutter Academy'),
+            title: Text('Flutter Academy',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground)),
+            actions: (MediaQuery.of(context).size.width <= ScreenSizes.md)
+                ? null
+                : [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          //foregroundColor: Colors.white,
+                          ),
+                      onPressed: () {},
+                      child: const Text("Home"),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          //foregroundColor: Colors.white,
+                          ),
+                      onPressed: () {},
+                      child: const Text("Courses"),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          //foregroundColor: Colors.white,
+                          ),
+                      onPressed: () {},
+                      child: const Text("About"),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          // foregroundColor: Colors.white,
+                          ),
+                      onPressed: () {},
+                      child: const Text("Contact"),
+                    ),
+                  ],
           ),
           const Header(),
           const SizedBox(
@@ -37,7 +108,7 @@ class HomePage extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 CourseCard(

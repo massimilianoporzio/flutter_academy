@@ -7,7 +7,7 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 500.0,
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
@@ -26,12 +26,14 @@ class Header extends StatelessWidget {
           const SizedBox(height: 40.0),
           Text(
             "Welcome to Flutter Academy",
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
                   color: Colors.white,
                 ),
           ),
           Text(
             "Your one stop education hub to learn Flutter.",
+            textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall

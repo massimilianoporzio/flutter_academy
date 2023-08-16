@@ -1,67 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_academy/res/responsive.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Container(
-      height: 300,
+      // height: 300, //responsive! non lo uso +
       color: Colors.grey.shade900,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
             height: 20,
           ),
           //tre expanded nella row mi prendono 1/3 ciascuno
-          const Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
+          Flex(
+            direction: getAxis(width),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (width > ScreenSizes.md)
+                const SizedBox(
                   width: 20,
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FooterLink("Home"),
-                      FooterLink("About"),
-                      FooterLink("Download Apps"),
-                      FooterLink("Contact"),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FooterLink("Blog"),
-                      FooterLink("Help and Support"),
-                      FooterLink("Join Us"),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FooterLink("Terms"),
-                      FooterLink("Privacy Policy"),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FooterLink("Home"),
+                  FooterLink("About"),
+                  FooterLink("Download Apps"),
+                  FooterLink("Contact"),
+                ],
+              ),
+              if (width > ScreenSizes.md) const Spacer(),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FooterLink("Blog"),
+                  FooterLink("Help and Support"),
+                  FooterLink("Join Us"),
+                ],
+              ),
+              if (width > ScreenSizes.md) const Spacer(),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FooterLink("Terms"),
+                  FooterLink("Privacy Policy"),
+                ],
+              ),
+            ],
           ),
           const SizedBox(
             height: 10,
           ),
-          Row(
+          Flex(
+            direction: getAxis(width),
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: width > ScreenSizes.md
+                    ? const EdgeInsets.only(left: 20.0)
+                    : const EdgeInsets.all(10),
                 child: Text(
                   "Flutter Academy",
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -69,9 +71,15 @@ class Footer extends StatelessWidget {
                       ),
                 ),
               ),
-              const Spacer(), //mi sposta il resto alla fine
+              width > ScreenSizes.md
+                  ? const Spacer()
+                  : const SizedBox(
+                      height: 10,
+                    ), //mi sposta il resto alla fine
               Padding(
-                padding: const EdgeInsets.only(right: 30.0),
+                padding: width > ScreenSizes.md
+                    ? const EdgeInsets.only(right: 30.0)
+                    : const EdgeInsets.only(bottom: 10),
                 child: Text(
                   "© 2018 Flutter Academy",
                   style: Theme.of(context)

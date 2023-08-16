@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_academy/res/responsive.dart';
 
 class FeaturedSection extends StatelessWidget {
   const FeaturedSection({
@@ -20,10 +21,15 @@ class FeaturedSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //prendo la larghezza del dispostivo
+    final width = MediaQuery.of(context).size.width;
     return Container(
+      //se schermo largo uso contenitore di altezza 600 se no lascio a null e andrò in colonna
+      height: width > ScreenSizes.md ? null : 600,
       width: 1340,
       padding: const EdgeInsets.all(32.0),
-      child: Row(
+      child: Flex(
+        direction: getAxis(width),
         children: [
           if (imageLeft)
             Expanded(
@@ -39,11 +45,13 @@ class FeaturedSection extends StatelessWidget {
               children: [
                 Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 20.0),
                 Text(
                   description,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontSize: 18.0,
                       ),
